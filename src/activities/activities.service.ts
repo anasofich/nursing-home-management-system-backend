@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import mongoose, { Model } from 'mongoose';
 import { Activity, ActivityDocument } from './schemas/activity.schema';
 import { CreateActivityDto } from './dto/create-activity.dto';
 import { User, UserDocument } from '../users/schemas/user.schema';
@@ -38,8 +38,14 @@ export class ActivitiesService {
     return this.activityModel.findById(id).exec();
   }
 
-  async findByUser(userId: string): Promise<Activity[]> {
+  /* async findByUser(userId: string): Promise<Activity[]> {
     return this.activityModel.find({ createdBy: userId }).exec();
+  } */
+
+  async findByUser(userId: string): Promise<Activity[]> {
+    return this.activityModel
+      .find({ createdBy: new mongoose.Types.ObjectId(userId) }) // Cast userId to ObjectId
+      .exec();
   }
 
   async update(

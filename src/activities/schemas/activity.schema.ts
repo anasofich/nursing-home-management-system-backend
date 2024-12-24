@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import mongoose, { Document } from 'mongoose';
 
 export type ActivityDocument = Activity & Document;
 
@@ -28,8 +28,8 @@ export class Activity {
   @Prop({ required: true })
   time: string;
 
-  @Prop({ type: String, ref: 'User', required: true }) // Links to a User
-  createdBy: string;
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }) // Use ObjectId
+  createdBy: mongoose.Schema.Types.ObjectId;
 }
 
 export const ActivitySchema = SchemaFactory.createForClass(Activity);
