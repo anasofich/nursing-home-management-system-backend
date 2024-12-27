@@ -16,22 +16,32 @@ export class AuthService {
     return this.generateToken(user);
   }
 
-  async login(username: string, password: string) {
+  async validateUser(username: string, pass: string): Promise<any> {
     const user = await this.usersService.findByUsername(username);
-    console.log('Found user:', user); // Check if user is returned
+    if (user && user.password === pass) {
+      const { password, ...result } = user;
+      return result;
+    }
+    return null;
+  }
 
+  async login(username: string) {
+    const user = await this.usersService.findByUsername(username);
     if (!user) {
-      throw new UnauthorizedException('Invalid credentials'); // No user found
+      throw new UnauthorizedException('Invalid credentials');
     }
 
-    console.log('Comparing passwords...');
-    if (!(await user.comparePassword(password))) {
-      throw new UnauthorizedException('Invalid credentials'); // Password mismatch
-    }
-
-    console.log('Password comparison successful'); // This should log if comparison works
-
-    return this.generateToken(user);
+    // Return both the token and user data
+    const payload = { username: user.username, sub: user._id, role: user.role };
+    return {
+      access_token: this.jwtService.sign(payload),
+      user: {
+        _id: user._id,
+        fullName: user.fullName,
+        email: user.email,
+        role: user.role,
+      },
+    };
   }
 
   private generateToken(user) {

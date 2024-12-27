@@ -29,7 +29,7 @@ export class UsersService {
   } */
 
   async findByUsername(username: string): Promise<UserDocument | null> {
-    return this.userModel.findOne({ username }).select('+password').exec();
+    return this.userModel.findOne({ username: username }).exec();
   }
 
   async findOne(id: string): Promise<User | null> {
