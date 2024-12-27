@@ -15,6 +15,8 @@ export class UsersService {
       ...createUserDto,
       password: hashedPassword,
     });
+
+    delete user._id;
     return user.save();
   }
 
@@ -25,6 +27,10 @@ export class UsersService {
   /* async findOne(id: string): Promise<User | undefined> {
     return this.userModel.findOne({ id }).exec();
   } */
+
+  async findByUsername(username: string): Promise<UserDocument | null> {
+    return this.userModel.findOne({ username }).select('+password').exec();
+  }
 
   async findOne(id: string): Promise<User | null> {
     return this.userModel.findById(id).exec();
