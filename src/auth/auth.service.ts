@@ -40,6 +40,11 @@ export class AuthService {
         fullName: user.fullName,
         email: user.email,
         role: user.role,
+        photo: user.photo,
+        username: user.username,
+        phoneNumber: user.phoneNumber,
+        activities: user.activities,
+        password: user.password,
       },
     };
   }

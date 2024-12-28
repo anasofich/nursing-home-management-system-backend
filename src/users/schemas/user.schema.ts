@@ -35,12 +35,6 @@ export class User {
 
   @Prop()
   photo: string;
-
-  /* async comparePassword(inputPassword: string): Promise<boolean> {
-    console.log('Input Password:', inputPassword);
-    console.log('Stored Password Hash:', this.password); // Hashed password
-    return bcrypt.compare(inputPassword, this.password);
-  } */
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
