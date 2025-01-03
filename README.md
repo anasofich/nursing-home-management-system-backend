@@ -31,15 +31,35 @@ Both the **frontend** and **backend** need to be running for the application to 
 ## Setting Up the Frontend
 
 1. Download files
-2. Run - npm install
-3. Run - npm run dev - to start frontend
-4. Open your browser and navigate to:
-   http://localhost:5173/
+2. Run
+
+```bash
+$ npm install
+```
+
+3. Run
+
+```bash
+$ npm run dev
+```
+
+To start frontend 4. Open your browser and navigate to:
+http://localhost:5173/
 
 ## Setting Up the Backend
 
 1. Download files
-2. Run - npm install
-3. Run - npm run start - to start backend
-4. The backend API will be available at:
-   http://localhost:3000/
+2. Run
+
+```bash
+$ npm install
+```
+
+3. Run
+
+```bash
+$ npm run start
+```
+
+To start backend 4. The backend API will be available at:
+http://localhost:3000/
