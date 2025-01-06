@@ -8,9 +8,11 @@ import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
-    MongooseModule.forRoot(
-      'mongodb+srv://anasofich:NursingDatabase@nursing-home-management.hlxly.mongodb.net/nursing-home-management-system?retryWrites=true&w=majority&appName=Nursing-home-management-platform',
-    ), // Replace with your MongoDB URI
+    MongooseModule.forRootAsync({
+      useFactory: () => ({
+        uri: process.env.MONGODB_URL,
+      }),
+    }),
     UsersModule,
     ActivitiesModule,
     AuthModule,
